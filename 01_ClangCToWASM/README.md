@@ -19,6 +19,9 @@ Note also that to get `clang` to use `wasm32`, you may have to install `lld-18`:
 ```sh
 sudo apt install lld-18
 ```
+To check if lld-18 is installed, use `apt list lld-18`.
+If it is installed, there should be a line of text that ends with `[installed]`.
+If not, when you try to build, you will get a message saying `unable to execute command: Executable "wasm-ld-18" doesn't exist!`.
 
 ## Building
 ```sh
@@ -27,6 +30,11 @@ make
 ```
 
 ## Running
-Open `index.html` in a web browser. Typically this will be done with a URL like `localhost/demo01/index.html`.
+Open `index.html` in a web browser. Typically this will be done with a URL like `http://localhost/demo01/index.html`.
+If you are using a server on the public internet, replace `localhost` with the IP address or hostname of your server, and include `http://` at the beginning of the URL.
+Most modern browsers will try to access websites on the internet with HTTPS by default.
+Since we have not set up HTTPS, you will get a page not found error otherwise.
+This applies to all future demos as well.
+
 The `index.html` file will load the WASM and call a few funtions from `Greeting` and `Utils` in the library, `Library.wasm`.
 Output will be in the JavaScript Console, so you need to open the debugger to see the output.
