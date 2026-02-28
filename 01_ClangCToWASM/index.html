@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+	<script type="module">
+	// We load the WASM from an async function so we can use await.
+	(async() =>
+	{
+		// These two lines just get the WASM file from the server and convert it to an array of bytes.
+		const response = await fetch("greeting.wasm");
+		const bytes = await response.arrayBuffer();
+
+		// This is what actually converts the bytes of WASM into a usable module.
+		// Later, we will use instantiateStreaming, which is more effecient.
+		const { instance } = await WebAssembly.instantiate(bytes);
+
+		// All exported functions are accessible from instance.exports.
+		// This is made possible by passing "--export-all" to the linker.
+		console.log("The answer is: " + instance.exports.add(24));
+	})();
+	</script>
+</body>
+</html>
