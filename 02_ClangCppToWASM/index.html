@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+	<script type="module">
+	(async() =>
+	{
+		const response = await fetch("Greeting.wasm");
+		const bytes = await response.arrayBuffer();
+		const { instance } = await WebAssembly.instantiate(bytes);
+
+		// Put a breakpoint here and inspect instance.exports to see if the function names have changed.
+		console.log("The Default Greeting Length is: " + instance.exports["_ZN8Greeting16getDefaultLengthEv"]());
+	})();
+	</script>
+</body>
+</html>
