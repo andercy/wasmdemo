@@ -1,0 +1,3 @@
+*.o
+*.wasm
+00_helloworldcpp/helloworldcpp
