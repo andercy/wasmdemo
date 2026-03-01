@@ -2,7 +2,7 @@
 
 # Note that unlike the previous demo, we are just compiling C code, not C++, so we just use clang, not clang++.
 CC = clang
-WEBROOT = /var/www/html/demo01
+WEBROOT = /var/www/html/wasmdemo01
 
 demo: greeting.wasm index.html
 	rm -rf ${WEBROOT}

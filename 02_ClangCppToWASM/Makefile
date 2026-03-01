@@ -10,7 +10,7 @@ CFLAGS = --target=wasm32 --no-standard-libraries -c
 LFLAGS = --target=wasm32 --no-standard-libraries -Wl,--export-all -Wl,--no-entry
 # Objects that need to be copied to website
 TARGETOBJECTS = Greeting.wasm index.html
-WEBROOT = /var/www/html/demo02
+WEBROOT = /var/www/html/wasmdemo02
 
 demo: ${TARGETOBJECTS}
 	rm -rf ${WEBROOT}
