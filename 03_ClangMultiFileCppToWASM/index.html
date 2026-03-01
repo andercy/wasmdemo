@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+	<script type="module">
+	(async() =>
+	{
+		const response = await fetch("Library.wasm");
+		const bytes = await response.arrayBuffer();
+		const { instance } = await WebAssembly.instantiate(bytes);
+
+		// Note that although we loaded only one .wasm file, we have access to functions from Greeting.cpp and Utils.cpp.
+		console.log("The Default Greeting Length is: " + instance.exports["_ZN8Greeting16getDefaultLengthEv"]());
+		console.log("The Utility Count is: " + instance.exports["_ZN5Utils8getCountEv"]());
+	})();
+	</script>
+</body>
+</html>

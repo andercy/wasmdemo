@@ -16,7 +16,7 @@ make
 ```
 
 ## Running
-Open `index.html` in a web browser. Typically this will be done with a URL like `localhost/demo02/index.html`.
+Open `index.html` in a web browser. Typically this will be done with a URL like `localhost/wasmdemo02/index.html`.
 The `index.html` file will load the WASM and call a few funtions from the `Greeting.wasm` library.
 Output will be in the JavaScript Console, so you need to open the debugger to see the output.
 

@@ -30,7 +30,7 @@ make
 ```
 
 ## Running
-Open `index.html` in a web browser. Typically this will be done with a URL like `http://localhost/demo01/index.html`.
+Open `index.html` in a web browser. Typically this will be done with a URL like `http://localhost/wasmdemo01/index.html`.
 If you are using a server on the public internet, replace `localhost` with the IP address or hostname of your server, and include `http://` at the beginning of the URL.
 Most modern browsers will try to access websites on the internet with HTTPS by default.
 Since we have not set up HTTPS, you will get a page not found error otherwise.

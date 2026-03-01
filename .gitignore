@@ -1,3 +1,9 @@
 *.o
 *.wasm
 00_helloworldcpp/helloworldcpp
+04_EmccOnlyWASM/Makefile
+04_EmccOnlyWASM/index.html
+04_EmccOnlyWASM/Testlib.h
+04_EmccOnlyWASM/Testlib.cpp
+04_EmccOnlyWASM/.vscode/*
+
