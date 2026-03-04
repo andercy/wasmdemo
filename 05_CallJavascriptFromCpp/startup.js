@@ -22,6 +22,7 @@ function logFromWASM(buffer, str, len)
 		console.log(text);
 }
 
+// This function was added just because sometimes innerHTML was null or undefined.
 function appendInnerHTML(el, text)
 {
 	if (el && el.innerHTML != undefined)

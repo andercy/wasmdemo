@@ -1,6 +1,6 @@
 # Makefile for 05_CallJavascriptFromCpp
 #
-# This Makefile does little more from previous demos other than copying the JS file to WEBROOT.
+# This Makefile does little more from previous demos other than adding Main.cpp and copying the JS file to WEBROOT.
 
 CC = clang++
 CFLAGS = --target=wasm32 --no-standard-libraries -c

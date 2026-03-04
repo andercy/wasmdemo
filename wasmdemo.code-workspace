@@ -16,13 +16,10 @@
 			"path": "04_EmccOnlyWASM"
 		},
 		{
-			"path": "../lazyfoo/01_hello_SDL"
-		},
-		{
 			"path": "05_CallJavascriptFromCpp"
 		},
 		{
-			"path": "06_PassObjectsToCpp"
+			"path": "06_UsingMallocInWASI"
 		}
 	],
 	"settings": {}

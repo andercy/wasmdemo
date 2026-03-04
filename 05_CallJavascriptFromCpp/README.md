@@ -15,6 +15,7 @@ It does this by passing an object to `instantiateStreaming` that holds the funct
 In the C/C++ code, the decorator `clang::import_name` is used to make the function available for use from C/C++.
 Naturally, if this decorator is used, and the object passed to `instantiate` does not have that function, `instantiate` will fail.
 Note that we have already been calling C/C++ from JavaScript, but this demo adds calling a `main` function.
+The `main` function has been placed in its own file, `Main.cpp`, since it does not belong in Greeting or Utils.
 The main function passes a C/C++ string to JavaScript.
 The next demo will work on passing string data from JavaScript to C/C++.
 WebAssembly actually only passes ints, so passing more complex data must be done with pointers.
@@ -30,13 +31,13 @@ Note that the layout used in this demo is slightly different from most examples 
 Instead of putting all the logic for the JavaScript function being called in an anonymous function, this example calls a named function.
 This was done just to make the code more organized and easier to understand.
 
-# Building
+## Building
 ```sh
 cd ~/src/wasmdemo/05_CallJavascriptFromCpp
 make
 ```
 
-# Running
+## Running
 Open `index.html` in a web browser. Typically this will be done with a URL like `localhost/wasmdemo05/index.html`.
 The `index.html` file will load the JavaScript file `startup.js`, which will load the WASM.
 It will then call a function from `Utils` then call the function `main`.
