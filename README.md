@@ -2,6 +2,14 @@
 by Cy Anderson
 
 ## Introduction
+Hello! This is my repository for experiments I am doing with WebAssembly.
+I made this repository on Github, so that they are backed up and easily transferable to different machines.
+I decided to make it public, so anyone could see how I managed to get WebAssembly to work.
+As of the time I am writing this, I am still working on getting some demos to work well enough to share and am working on more to come afterwards.
+Specifically, I am working on using SDL with WASM, which should open up some very interesting possibilities.
+
+---
+
 WebAssembly is an exciting new standard for the Internet.
 It offers cross platform compatibility, near native speed and flexibility in choice of language.
 Unfortunately, documentation for WebAssembly is somewhat lacking, and available code samples often do not work without modification.
@@ -17,12 +25,23 @@ Note that most WebAssembly tutorials use emscripten to generate WASM.
 The goal of these demos is to show how WASM works from a more basic level, so most of these do not use emscripten.
 emscripten generates a large amount of overhead, including JavaScript and HTML that obfuscate some of what is being done under the hood.
 
+## Prerequisites
+You do not have to be an advanced programmer to use these demos, but you do need to have at least a beginning level of experience with the following to understand and get the most out of these demos.
+* Linux / bash
+* HTML
+* JavaScript
+* C/C++
+* make
+* Browser Dev Tools / Debugging
+* Basic understanding of binary / decimal / hexidecimal
+* Basic understanding of program structure, such as memory, the stack, the heap, compiling and linking
+
 ## Environment
 WebAssembly runs on an array of platforms. That is one of its main advantages.
-For simplicity and ease of reproduction, these demos were developed primarily on Kubuntu Linux 24.04.3.
-They have been simultaneously devloped on an AWS EC2 instance running Ubuntu 24.
+For simplicity and ease of reproduction, these demos were developed primarily on a Virtual Machine running Kubuntu Linux 24.04.3.
+They have been simultaneously devloped on an AWS EC2 instance also running Ubuntu 24.
 Instructions assume you are familiar with Ubuntu or another Debian flavor of Linux, but they should work similarly for other distributions with only small modifications.
-These demos should also be able to work on Windows, but it easier to show exact command line steps for setup on Linux.
+These demos should also be able to work on Windows, but it is easier to show exact command line steps for setup on Linux.
 
 Several packages are needed in the process of building these demos.
 They do not all have to be installed at once, however.
@@ -40,6 +59,7 @@ These packages are listed in order to make this environment reproducible as exac
 * clang
 * lld-18
 * cmake
+* wasi-libc
 * libsdl2-dev
 * python3 (needed for emscripten)
 
@@ -86,9 +106,9 @@ This means it is listening for incoming traffic from the internet on port 80, th
 (Note that `tcp6` actually means it is listening on the newer IPv6 protocol, but Apache will accept regular IPv4 traffic also.)
 
 When Apache installs, it will by default create a new directory, `/var/www/html`, as your webroot.
-You can change this if you want, but for simplicity, all the demos assume webfiles will be placed under this directory.
+You can change this if you want, but for simplicity, all the demos assume web files will be placed under this directory.
 More specifically, they will be placed in the subdirectory `/var/www/html/wasmdemo`.
-Then under that directory, when a demo is built, it will create a subdirectory named `demoXX`, where XX is the demo number, and place all the web files in there.
+Then under that directory, when a demo is built, it will create a subdirectory named `wasmdemoXX`, where XX is the demo number, and place all the web files in there.
 If you wish to use a different webroot, just change the value for the `WEBROOT` variable in the Makefile for the demo.
 
 IMPORTANT! Be sure to set the correct permissions for the webroot directory before trying to use it.
@@ -112,28 +132,30 @@ sudo apt install gcc
 sudo apt install make
 sudo apt install git
 sudo apt install clang
+sudo apt install cmake
 ```
 
 Note that most distributions come with git, and many also come with gcc and make installed, so you might not have to install those.
 The clang package, however, is most likely not on your system to start.
 You can quickly determine if a package is already installed with `apt list [packagename]`.
-Ultimately, if a package is not installed, you will get `command not found` error when you try to run it.
+Ultimately, if a package is not installed, you will get the error `command not found` when you try to run it.
 
 You can use whatever editor you want to modify source files if you need, but this demo was built using MS Visual Studio Code.
-Some instructions are given for if you are using VSCode.
-If you use some other IDE, you may encounter similar problems but with slightly different fixes.
-To install VSCode on KUbuntu, first download the `.deb` package file from Microsoft here: [Install VSCode on Linux](https://code.visualstudio.com/docs/setup/linux#_install-vs-code-on-linux).
+Some extra instructions are given for if you are using VSCode.
+If you use some other IDE, you may encounter similar problems to those we encountered with VSCode but with slightly different fixes.
+To install VSCode on Kubuntu, first download the `.deb` package file from Microsoft here: [Install VSCode on Linux](https://code.visualstudio.com/docs/setup/linux#_install-vs-code-on-linux).
 Then run the commands
 ```sh
 cd [DownloadDirectory]
 sudo apt install ./code_x.xxx.x-xxxxxxxxxx_amd64.deb
 ```
 Where the `x`'s are replaced with whatever version number you downloaded.
-On KUbuntu, `[DownloadDirectory]` is often `~/Downloads`.
+On Kubuntu, `[DownloadDirectory]` is often `~/Downloads`.
 
 Last, you need to download the demo files by cloning the git repository.
-Assuming you put repositories under the `src` directory in your home directory, run this command
+Assuming you put repositories under the `src` directory in your home directory, run these commands
 ```sh
+cd ~/src
 git clone https://github.com/andercy/wasmdemo.git
 ```
 If you are using VSCode, you can then open the entire wasmdemo workspace by opening the file `wasmdemo.code-workspace` under File>Open Workspace.
@@ -141,7 +163,20 @@ If you are using VSCode, you can then open the entire wasmdemo workspace by open
 That's it! Once you are at this point, you are ready to start building the demos.
 Just start at 00_helloworldcpp and work your way up numerically.
 Always read the README file first then the Makefile then follow the instructions for Building and Running.
+The source files are loaded with comments to help you understand more about how WASM works.
 
 Keep in mind that this project is currently in progress and new demos are being added regularly.
 
-Feel free to modify any code you want and do all the testing you like, but do not distribute this project with any modifications.
+Feel free to modify any code you want and do all the experimentation you like, but do not distribute this project with any modifications.
+
+## References
+The following sites were invaluable resources for making this project.
+I highly recommend checking these out for more information.
+
+* [Mozilla Developer Network WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) This is a good starting point for anyone interested in starting with WebAssembly and also contains some in depth reference material.
+* [Clang Site](https://clang.llvm.org/) This is the official site for the clang compiler. It is interesting to learn more about Clang, but it is not specifically about WASM.
+* [Emscripten Site](https://emscripten.org/docs/getting_started/Tutorial.html) Most WebAssembly projects use emscripten, which uses clang, but for simplicity we just use clang directly. This is still a great site for getting started in WebAssembly.
+* [wasi-libc on Github](https://github.com/WebAssembly/wasi-libc) This site is vital for figuring out how to build and use wasi-libc correctly. It allows the use of many libc functions in WASM.
+* [Depth First Compiling C to WebAssembly without emscripten](https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/) This site describes how to get started with WASM using only Clang. This is rare, since most tutorials just use emscripten.
+* [Lazy Foo Productions](https://lazyfoo.net/tutorials/SDL/index.php) This is an excellent guide on getting started with SDL. SDL is a library for accessing input and output devices at a level closer to hardware. This does not discuss WASM, but we can use SDL from WASM to create graphics output and to get input from the user.
+* [Surma Compiling C to WebAssembly](https://surma.dev/things/c-to-webassembly) An interesting site with some in depth information about WASM. It gets into some very deep stuff, like making your own allocation function, which we should not need if we use wasi-libc.
