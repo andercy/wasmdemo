@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "06_UsingMallocInWASI"
+		},
+		{
+			"path": "07_PassStringsToCpp"
 		}
 	],
 	"settings": {}
