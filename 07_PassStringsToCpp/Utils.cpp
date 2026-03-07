@@ -4,8 +4,6 @@
 
 #include "Utils.h"
 
-// Globals
-
 
 Utils::Utils()
 {
