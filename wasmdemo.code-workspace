@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "07_PassStringsToCpp"
+		},
+		{
+			"path": "08_ObjectsInWASM"
 		}
 	],
 	"settings": {}
