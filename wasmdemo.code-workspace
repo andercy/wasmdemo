@@ -26,6 +26,9 @@
 		},
 		{
 			"path": "08_ObjectsInWASM"
+		},
+		{
+			"path": "09_ModifyingDOMInWASM"
 		}
 	],
 	"settings": {}
