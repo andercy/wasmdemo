@@ -13,12 +13,12 @@ So we need to devise a method to make sure strings are freed when not used, not 
 Other languages, like Rust, use the idea of ownership of data to prevent memory leakage.
 We will use a similar system, but much simpler.
 These will be our Rules:
-1. The function that allocates memory is responsible for freeing it.
+1. The function or object that allocates memory is responsible for freeing it and must also set the pointer to NULL.
 2. Strings passed to an object must make a copy of that string if they intend to keep it.
 3. Objects must free any strings they own in their takedown code.
 4. The function that dynamically allocated an object must call the takedown code on the object when done with it.
 5. Objects should be passed by reference, especially for calls from JavaScript. Passing a reference to an object does not transfer ownership.
-6. Any time a function returns a pointer, the function receiving the pointer is responsible for freeing it.
+6. Any time a function returns a pointer, the function receiving the pointer is responsible for freeing it and must also set the pointer to NULL.
 7. (Exception to 6) If a function wants to return a pointer but not transfer ownership to the caller, the function name should start with `getRef`.
 8. As much as possible, treat strings as immutable. (Unless building a large string, of course, then treat as immutable once done building it, if not too large.)
 
